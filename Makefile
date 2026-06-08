@@ -1,6 +1,7 @@
 # Image URL to use all building/pushing image targets
 IMG ?= claw-operator:latest
 PROXY_IMG ?= claw-proxy:latest
+DEPLOYER_IMG ?= openclaw-deployer:latest
 KUBECTL_IMG ?= quay.io/openshift/origin-cli:4.21
 BUNDLE_IMG ?= claw-operator-bundle:v$(VERSION)
 CATALOG_IMG ?= claw-operator-catalog:latest
@@ -315,6 +316,14 @@ dev-cleanup: ## Remove deployed controller and CRDs.
 	$(MAKE) undeploy ignore-not-found=true
 	$(MAKE) uninstall ignore-not-found=true
 
+.PHONY: deployer-build
+deployer-build: ## Build the OpenClaw deployer UI image. Usage: make deployer-build DEPLOYER_IMG=quay.io/myuser/openclaw-deployer:tag
+	$(CONTAINER_TOOL) build --platform=$(PLATFORM) -f Containerfile.deployer -t $(DEPLOYER_IMG) .
+
+.PHONY: deployer-push
+deployer-push: ## Push the OpenClaw deployer UI image.
+	$(CONTAINER_TOOL) push $(DEPLOYER_IMG)
+
 ##@ OLM Bundle
 
 BUNDLE_CSV = bundle/manifests/claw-operator.clusterserviceversion.yaml
@@ -511,4 +520,3 @@ mv $(1) $(1)-$(3) ;\
 } ;\
 ln -sf $(1)-$(3) $(1)
 endef
-

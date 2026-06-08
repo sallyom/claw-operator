@@ -1,0 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: openclaw-deployer-impersonator
+rules:
+  - apiGroups:
+      - ""
+      - user.openshift.io
+    resources:
+      - users
+      - groups
+    verbs:
+      - impersonate
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: openclaw-deployer-impersonator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: openclaw-deployer-impersonator
+subjects:
+  - kind: ServiceAccount
+    name: openclaw-deployer
+    namespace: openclaw-deployer

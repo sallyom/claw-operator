@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: openclaw-deployer
+  labels:
+    app.kubernetes.io/name: openclaw-deployer
+spec:
+  to:
+    kind: Service
+    name: openclaw-deployer
+  port:
+    targetPort: oauth
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: openclaw-deployer
+resources:
+  - serviceaccount.yaml
+  - auth-delegator-clusterrolebinding.yaml
+  - impersonation-clusterrolebinding.yaml
+  - deployment.yaml
+  - service.yaml
+  - route.yaml
+images:
+  - name: openclaw-deployer
+    newName: quay.io/sallyom/openclaw-operator-deployer
+    newTag: deployer-ui

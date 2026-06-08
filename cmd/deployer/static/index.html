@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw Deployer</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">OpenClaw<br><span>Deployer</span></div>
+      <nav>
+        <a class="active" href="/">OpenShift</a>
+      </nav>
+    </aside>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">OpenShift</p>
+          <h1>OpenClaw Deployer</h1>
+        </div>
+        <div class="account">
+          <p class="user" id="user"></p>
+          <a class="signout" href="/oauth/sign_out?rd=/">Sign out</a>
+        </div>
+      </header>
+
+      <section class="grid">
+        <article class="card" id="card">
+          <div class="corner" id="corner">✓</div>
+          <div class="card-title">
+            <div class="mascot" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <h2>OpenClaw</h2>
+          </div>
+
+          <ul class="features">
+            <li>Personalized AI Assistant</li>
+            <li>Secured Deployment</li>
+            <li>Customized for your needs</li>
+          </ul>
+
+          <form class="form" id="form">
+            <label>
+              Namespace
+              <input id="namespace" name="namespace" required readonly autocomplete="off" placeholder="your-claw-project">
+            </label>
+            <label>
+              Claw name
+              <input id="clawName" name="clawName" required autocomplete="off" value="instance">
+            </label>
+            <label>
+              Agent name
+              <input id="agentName" name="agentName" required autocomplete="off" value="OpenClaw Assistant">
+            </label>
+            <label>
+              Provider
+              <select id="provider" name="provider">
+                <option value="openrouter">OpenRouter</option>
+                <option value="openai">OpenAI</option>
+                <option value="google">Google Gemini</option>
+                <option value="anthropic">Anthropic</option>
+                <option value="xai">xAI</option>
+              </select>
+            </label>
+            <label>
+              Model
+              <input id="model" name="model" required autocomplete="off" list="model-options" value="openrouter/anthropic/claude-sonnet-4-6">
+              <datalist id="model-options"></datalist>
+            </label>
+            <label id="api-key-row">
+              API key
+              <input id="apiKey" name="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste provider key">
+            </label>
+          </form>
+
+          <p class="status" id="status">Checking status...</p>
+          <div class="running" id="running" hidden>
+            <h3>Your OpenClaws</h3>
+            <div class="claw-list" id="claw-list"></div>
+          </div>
+
+          <div class="actions">
+            <button id="provision" type="button">Create</button>
+            <button id="restart" type="button" class="secondary" disabled>Restart</button>
+            <button id="delete" type="button" class="danger" disabled>Delete</button>
+          </div>
+        </article>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

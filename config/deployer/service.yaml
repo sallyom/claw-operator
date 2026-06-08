@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: openclaw-deployer
+  labels:
+    app.kubernetes.io/name: openclaw-deployer
+spec:
+  selector:
+    app.kubernetes.io/name: openclaw-deployer
+  ports:
+    - name: oauth
+      port: 4180
+      targetPort: oauth
